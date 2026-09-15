@@ -173,4 +173,4 @@ are the statement holes expected by Palomar and are excluded from that count.
 
 ## Licence
 
-Apache License 2.0. See [`LICENSE`](LICENSE).
+Apache License 2.0. See [`LICENSE`](LICENSE). Third-party attribution and licence terms for material adapted from HOL Light are recorded in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
