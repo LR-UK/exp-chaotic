@@ -27,7 +27,7 @@ project:
 
 classification:
   arxiv: ["math.DS","math.CV"]
-  msc2020: ["37F10","30D05","54H20"]
+  msc2020: ["37F10","30D05"]
 
 sources:
   - title: "The Exponential Map Is Chaotic: An Invitation to Transcendental Dynamics"
