@@ -1,0 +1,23 @@
+name = "ExpChaotic"
+version = "0.1.0"
+defaultTargets = ["ExpChaotic", "Challenge", "Solution", "Audit"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "7801e8406155c31b340d28e2762f754d02b5e9b0"
+
+[[lean_lib]]
+name = "ExpChaotic"
+
+[[lean_lib]]
+name = "Challenge"
+roots = ["Challenge"]
+
+[[lean_lib]]
+name = "Solution"
+roots = ["Solution"]
+
+[[lean_lib]]
+name = "Audit"
+roots = ["Audit"]

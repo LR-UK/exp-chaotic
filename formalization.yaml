@@ -1,0 +1,273 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+
+version: "v0.4"
+
+project:
+  name: "The exponential map is chaotic"
+  description: >-
+    A Lean 4 formalisation of Misiurewicz's theorem and the principal dynamical
+    consequences for the complex exponential: density of escaping points, dense
+    orbits, and repelling periodic points; eventual covering of compact subsets of
+    the punctured plane; Devaney chaos; spherical non-equicontinuity; and the fact
+    that the Julia set is the whole plane. 
+  authors:
+    - "Lasse Rempe"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Lasse Rempe"
+
+classification:
+  arxiv: ["math.DS"]
+  msc2020: ["37F10", "30D05", "37D45"]
+
+sources:
+  - title: "The Exponential Map Is Chaotic: An Invitation to Transcendental Dynamics"
+    authors:
+      - "Zhaiming Shen"
+      - "Lasse Rempe-Gillen"
+    id: "arXiv:1408.1129"
+    type: "journal article"
+    location: "https://doi.org/10.4169/amer.math.monthly.122.10.919"
+    relationship: "formalizes"
+    note: >-
+      All results in Theorems 1.1 and 1.2 are proved, as are the principal
+      intermediate density, covering, and sensitivity statements. The proof route
+      differs from the paper's hyperbolic-metric exposition.
+    license: "unknown"
+    author_endorsement: "participated"
+  - title: "On iterates of e^z"
+    authors:
+      - "Michał Misiurewicz"
+    type: "journal article"
+    location: "Ergodic Theory and Dynamical Systems 1 (1981), 103–106"
+    relationship: "formalizes"
+    note: "The formalisation proves the Fatou set is empty and the Julia set is all of the plane."
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/jrh13/hol-light/blob/master/Examples/misiurewicz.ml"
+    relationship: "adapts"
+    note: >-
+      John Harrison's BSD-2-Clause HOL Light formalisation supplied the six-lemma
+      architecture and mathematical interface for the initial proof stage.
+
+status:
+  scope: >-
+    Theorems 1.1 and 1.2 of Shen–Rempe-Gillen are fully represented. The project
+    also proves Theorem 4.3, Corollaries 4.4, 5.5, and 5.6, Observation 5.2, Theorem 6.1,
+    the standard density benchmarks, and Misiurewicz's original statement, which had been
+    conjectured by Fatou.
+    The precise sensitivity condition of Definition 2.3 holds with arbitrary positive
+    constants as in Exercise 8.7. The remaining exercises, appendix/outlook, hyperbolic
+    preliminaries, and precise formulations of Proposition 5.3, Observation 5.4, and
+    Lemma 6.2 are not included. Normality is defined for sequences of maps from a
+    topological space to a uniform space, using Mathlib's locally uniform convergence
+    on the domain subtype. The Fatou set specialises this to sphere-valued exponential
+    iterates on open subsets of the plane. The Julia theorem follows from direct
+    exclusion of all locally uniform subsequential limits on nonempty open sets.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+  main_results:
+    - declaration: "ExpChaotic.dense_escapingSet"
+      file: "ExpChaotic/Results.lean"
+      sorry_count: 0
+      comparator_config: "comparator.json"
+    - declaration: "ExpChaotic.dense_denseOrbitSet"
+      file: "ExpChaotic/Results.lean"
+      sorry_count: 0
+      comparator_config: "comparator.json"
+    - declaration: "ExpChaotic.dense_repellingPeriodicSet"
+      file: "ExpChaotic/Results.lean"
+      sorry_count: 0
+      comparator_config: "comparator.json"
+    - declaration: "ExpChaotic.devaney_chaotic"
+      file: "ExpChaotic/Results.lean"
+      sorry_count: 0
+      comparator_config: "comparator.json"
+    - declaration: "ExpChaotic.juliaSet_exp"
+      file: "ExpChaotic/Results.lean"
+      sorry_count: 0
+      comparator_config: "comparator.json"
+    - declaration: "ExpChaotic.not_tendstoLocallyUniformly_sphericalExpIterate"
+      file: "ExpChaotic/Results.lean"
+      sorry_count: 0
+      comparator_config: "comparator.json"
+
+automation:
+  methods:
+    - method: "manual"
+      models: []
+      framework: "Lean 4 and Mathlib"
+      tool_setup: >-
+        Mathematical direction, selection and correction of statements, proof
+        design, and iterative review by Lasse Rempe. This included the key
+        observation that the final real-axis argument did not require the full
+        Montel theorem and could instead be implemented using Schwarz-lemma
+        arguments.
+
+    - method: "copilot"
+      models: []
+      framework: "Microsoft 365 Copilot"
+      tool_setup: >-
+        Writing and iterative refinement of Lean code for the initial scaffold. 
+        Lasse Rempe tested the generated code locally and supplied compilation errors 
+        and mathematical corrections for successive revisions.
+
+    - method: "agent"
+      models:
+        - "Anthropic Claude Opus 5"
+      framework: "Anthropic Claude"
+      tool_setup: >-
+        Construction and execution of substantial parts of the initial Lean
+        proof that the iterated preimages of the real axis are dense, including
+        supporting complex-analysis and strip-geometry results. This work used
+        the existing scaffold, Lasse Rempe's mathematical guidance, and the
+        architecture of John Harrison's HOL Light formalisation.
+
+    - method: "agent"
+      models:
+        - "OpenAI GPT-5.6 Sol"
+        - "OpenAI GPT-6 Astra"
+      framework: "OpenAI Codex"
+      tool_setup: >-
+        Compilation, proof repair, reorganisation, extension, documentation,
+        auditing, and preparation of the project for publication.
+      prompting_notes: >-
+        The formaliser supplied the source paper, selected benchmark statements,
+        corrected the sphere-valued formulation, and requested increasingly
+        strong consequences. The agent developed and checked the Lean proofs
+        incrementally.
+
+  spend_usd: "not tracked"
+  notes: >-
+    Lasse Rempe determined the mathematical scope, supplied and corrected the
+    statements, and developed the initial scaffold with assistance from Microsoft
+    365 Copilot. He also provided substantial mathematical guidance for the
+    initial proof, particularly the observation that density of the iterated
+    preimages of the real axis did not require the full Montel theorem and could
+    instead be proved using Schwarz-lemma arguments. Claude Opus 5 implemented
+    and tested substantial parts of this proof and its supporting complex-analysis
+    and strip-geometry results. ChatGPT subsequently compiled, repaired,
+    reorganised, extended and documented the development, adding the
+    compact-covering, periodic-point, dynamical, normality and spherical results
+    and preparing the project for publication.
+
+fidelity:
+  divergences: >-
+    The proof is not a line-by-line implementation of the paper's hyperbolic-metric
+    argument. Its first part adapts the HOL Light proof architecture; later results
+    use explicit logarithmic branches, quantitative open mapping, contraction, and
+    Baire category. Normality is an abstract sequential compactness condition for maps
+    into a uniform space, with Mathlib's convergence predicate and subtype limit domain. The
+    spherical statements treat iterates as maps from the plane to the sphere and do
+    not extend the exponential to infinity.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: >-
+    The declarations have been compiled, linted, and audited for axioms by the AI
+    workflow. Executable audits check documentation, permitted axioms, and structural
+    agreement of the challenge and solution interfaces. The external Comparator/NanoDa
+    end-to-end run remains outstanding. Lasse Rempe reviewed the preceding challenge
+    statements and supplied annotations. No independent line-by-line
+    implementation review or external review has taken place.
+
+alignment:
+  namespace: "ExpChaotic"
+  statements:
+    - source: "Shen–Rempe-Gillen, Corollary 5.5"
+      lean: "ExpChaotic.eventually_covers_compact"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "Every sufficiently late image covers any compact set omitting zero."
+    - source: "Standard backward-orbit consequence"
+      lean: "ExpChaotic.dense_iteratedPreimages_nonzero"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "The union of all iterated preimages of any nonzero point is dense."
+    - source: "Misiurewicz real-axis benchmark"
+      lean: "ExpChaotic.dense_iteratedPreimages_realAxis"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "The union of all iterated preimages of the real axis is dense."
+    - source: "Shen–Rempe-Gillen, Theorem 4.1"
+      lean: "ExpChaotic.dense_escapingSet"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "The escaping set is dense."
+    - source: "Shen–Rempe-Gillen, Corollary 5.6"
+      lean: "ExpChaotic.dense_denseOrbitSet"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "The set of points with dense orbit is dense."
+    - source: "Shen–Rempe-Gillen, Corollary 5.6"
+      lean: "ExpChaotic.not_countable_denseOrbitSet"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "There are uncountably many dense-orbit points."
+    - source: "Shen–Rempe-Gillen, Theorem 6.1"
+      lean: "ExpChaotic.dense_repellingPeriodicSet"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "Repelling periodic points are dense."
+    - source: "Shen–Rempe-Gillen, Theorem 5.1"
+      lean: "ExpChaotic.topologically_transitive"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: >-
+        Topological transitivity, stated using Mathlib's
+        MulAction.IsTopologicallyTransitive and IterateMulAct definitions.
+    - source: "Shen–Rempe-Gillen, Theorem 1.2"
+      lean: "ExpChaotic.devaney_chaotic"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "Continuity, dense periodic points, and topological transitivity."
+    - source: "Shen–Rempe-Gillen, Corollary 4.4 and Exercise 8.7"
+      lean: "ExpChaotic.not_equicontinuousAt_sphericalExpIterate"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "Sphere-valued iterates are not equicontinuous at any finite point."
+    - source: "Misiurewicz, On iterates of e^z"
+      lean: "ExpChaotic.juliaSet_exp"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "The locally defined Julia set is the whole complex plane."
+    - source: "Misiurewicz spherical non-normality consequence"
+      lean: "ExpChaotic.not_tendstoLocallyUniformlyOn_sphericalExpIterate"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: >-
+        No increasing subsequence converges locally uniformly to any sphere-valued
+        function on a nonempty open set. Uses Mathlib's TendstoLocallyUniformlyOn
+        directly; this additional theorem does not change the challenge interface.
+    - source: "Misiurewicz spherical non-normality with a domain-restricted limit"
+      lean: "ExpChaotic.not_tendstoLocallyUniformly_sphericalExpIterate"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "Challenge statement with a limit function defined only on the open set."
+    - source: "Shen–Rempe-Gillen, Theorem 4.3"
+      lean: "ExpChaotic.infinitely_often_hits_negative_realAxis"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "Infinitely many images meet the strictly negative real axis; eventual hitting is also proved."
+    - source: "Shen–Rempe-Gillen, Corollary 4.4, Definition 2.3, and Exercise 8.7"
+      lean: "ExpChaotic.spherical_sensitive_dependence_paper"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "The explicit condition holds for arbitrary positive constants at every sufficiently late time."
+    - source: "Shen–Rempe-Gillen, Observation 5.2"
+      lean: "ExpChaotic.expansion_along_escaping_orbits"
+      module: "ExpChaotic.Results"
+      status: "proved"
+      note: "Real parts and derivative norms tend to positive infinity along escaping orbits."
+
+acknowledgements: >-
+  Mathlib supplies the analytic, topological, and dynamical infrastructure.
+  John Harrison's HOL Light development supplied the architecture for the
+  initial proof stage. Microsoft 365 Copilot assisted with the initial scaffold;
+  Claude Opus 5 implemented and tested substantial parts of the initial
+  real-axis proof; and OpenAI Codex subsequently repaired, extended, documented,
+  audited, and prepared the project for publication.

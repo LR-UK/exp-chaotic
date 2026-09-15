@@ -1,0 +1,37 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "ExpChaotic.eventually_covers_compact",
+    "ExpChaotic.dense_iteratedPreimages_nonzero",
+    "ExpChaotic.dense_iteratedPreimages_realAxis",
+    "ExpChaotic.dense_escapingSet",
+    "ExpChaotic.dense_denseOrbitSet",
+    "ExpChaotic.not_countable_denseOrbitSet",
+    "ExpChaotic.dense_repellingPeriodicSet",
+    "ExpChaotic.topologically_transitive",
+    "ExpChaotic.devaney_chaotic",
+    "ExpChaotic.not_equicontinuousAt_sphericalExpIterate",
+    "ExpChaotic.infinitely_often_hits_negative_realAxis",
+    "ExpChaotic.spherical_sensitive_dependence_paper",
+    "ExpChaotic.expansion_along_escaping_orbits",
+    "ExpChaotic.not_tendstoLocallyUniformly_sphericalExpIterate",
+    "ExpChaotic.juliaSet_exp"
+  ],
+  "definition_names": [
+    "ExpChaotic.expIterate",
+    "ExpChaotic.EscapesToInfinity",
+    "ExpChaotic.escapingSet",
+    "ExpChaotic.denseOrbitSet",
+    "ExpChaotic.repellingPeriodicSet",
+    "ExpChaotic.IsNormalSequenceOn",
+    "ExpChaotic.fatouSet",
+    "ExpChaotic.juliaSet",
+    "ExpChaotic.IsDevaneyChaotic",
+    "ExpChaotic.RiemannSphere",
+    "ExpChaotic.riemannSphereUniformSpace",
+    "ExpChaotic.sphericalExpIterate"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}
