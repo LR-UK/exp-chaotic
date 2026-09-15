@@ -26,8 +26,8 @@ project:
     - "Lasse Rempe"
 
 classification:
-  arxiv: ["math.DS"]
-  msc2020: ["37F10", "30D05", "37D45"]
+  arxiv: ["math.DS","math.CV"]
+  msc2020: ["37F10", "30D05","54H20"]
 
 sources:
   - title: "The Exponential Map Is Chaotic: An Invitation to Transcendental Dynamics"
